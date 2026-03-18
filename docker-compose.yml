@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  streamlit-app:
+    build: .
+    container_name: voice-chat-app
+    ports:
+      - "8501:8501"
+    environment:
+      - PIPER_API_URL=${PIPER_API_URL}
+      - PIPER_PASSWORD=${PIPER_PASSWORD}
+      - OLLAMA_URL=http://ollama:11434/api/generate
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.2:3b}
+    volumes:
+      - ./temp_audio:/tmp/audio
+    networks:
+      - ai-network
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ai-network
+    restart: unless-stopped
+    command: serve
+
+networks:
+  ai-network:
+    driver: bridge
+
+volumes:
+  ollama_data:
