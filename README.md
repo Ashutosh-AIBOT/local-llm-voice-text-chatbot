@@ -1,4 +1,4 @@
-# 🧰 AI Multi-Tool Dashboard — Unified AI Application Suite
+# AI Multi-Tool Dashboard Using Ollama —
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat-square&logo=python)
 ![Streamlit](https://img.shields.io/badge/UI-Streamlit-red?style=flat-square&logo=streamlit)
